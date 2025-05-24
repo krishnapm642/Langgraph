@@ -1,13 +1,20 @@
-from typing import TypedDict
+from typing import TypedDict, List, Annotated
 from langgraph.graph import END, StateGraph
+import operator
 
 
 class CountState(TypedDict):
     count : int
+    sum : Annotated[int, operator.add]  # Using an operator to sum values
+    history : Annotated[List[int], operator.concat]  # Using a list to keep track of history
 
-def increment(state : CountState):
-    state['count'] += 1
-    return state
+def increment(state : CountState) -> CountState:
+    new_count = state['count'] + 1
+    return {
+        'count': new_count,
+        'sum': new_count,
+        'history':[new_count]
+    }
 
 
 def should_continue(state: CountState):
