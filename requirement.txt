@@ -1,0 +1,7 @@
+langchain
+langgraph
+langchain-openai
+numpy
+pandas
+pydantic
+langchain_community
